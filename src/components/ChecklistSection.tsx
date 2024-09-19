@@ -15,11 +15,25 @@ function ChecklistSection({ title, listItems }: Props) {
     new Array(listItems.length).fill(false),
   );
 
-  const iconColor = checkedBoxes.every((e) => e)
-    ? "text-green-500"
+  const completionStatus = checkedBoxes.every((e) => e)
+    ? "FULL_COMPLETION"
     : checkedBoxes.some((e) => e)
-      ? "text-amber-400"
-      : "text-red-600";
+      ? "PARTIAL_COMPLETION"
+      : "NO_COMPLETION";
+
+  const iconColor =
+    completionStatus === "FULL_COMPLETION"
+      ? "text-green-500"
+      : completionStatus === "PARTIAL_COMPLETION"
+        ? "text-amber-400"
+        : "text-red-600";
+
+  const ariaLabel =
+    completionStatus === "FULL_COMPLETION"
+      ? "Fully complete"
+      : completionStatus === "PARTIAL_COMPLETION"
+        ? "Partially complete"
+        : "Not started";
 
   const toggle = (index: number) => {
     const newArr = [...checkedBoxes];
@@ -39,6 +53,7 @@ function ChecklistSection({ title, listItems }: Props) {
             "text-lg transition-colors sm:text-2xl",
             iconColor,
           )}
+          aria-label={ariaLabel}
         />
       </div>
       <ul className="flex flex-col gap-2">
