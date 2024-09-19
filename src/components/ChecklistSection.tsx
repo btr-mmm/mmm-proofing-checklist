@@ -35,7 +35,10 @@ function ChecklistSection({ title, listItems }: Props) {
         <h2 className="mb-2 text-lg font-semibold sm:text-2xl">{title}</h2>
         <FontAwesomeIcon
           icon={faCircleFilled}
-          className={twMerge("text-lg sm:text-2xl", iconColor)}
+          className={twMerge(
+            "text-lg transition-colors sm:text-2xl",
+            iconColor,
+          )}
         />
       </div>
       <ul className="flex flex-col gap-2">
